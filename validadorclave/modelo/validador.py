@@ -1,6 +1,8 @@
 # TODO: Implementa el código del ejercicio aquí
 from abc import ABC, abstractmethod
 
+from validadorclave.modelo.errores import NoTieneLetraMayusculaError, NoTieneLetraMinusculaError, NoTieneNumeroError, \
+    NoTieneCaracterEspecialError, NoCumpleLongitudMinimaError, NoTienePalabraSecretaError
 
 class ReglaValidacion(ABC):
 
@@ -31,3 +33,9 @@ class ReglaValidacionGanimedes(ReglaValidacion):
     def contiene_caracter_especial(self, clave):
         especiales = "@_#$%"
         return any(char in especiales for char in clave)
+
+
+class ReglaValidacionCalisto(ReglaValidacion):
+
+    def contiene_calisto(self):
+        pass
