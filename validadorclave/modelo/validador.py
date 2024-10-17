@@ -52,5 +52,8 @@ class ReglaValidacionCalisto(ReglaValidacion):
     def __init__(self):
         super().__init__(6)
 
-    def contiene_calisto(self):
+    def contiene_calisto(self, clave: str) ->bool:
+        pass
+
+    def es_valida(self, clave: str) ->bool:
         pass
