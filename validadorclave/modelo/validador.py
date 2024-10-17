@@ -10,16 +10,20 @@ class ReglaValidacion(ABC):
         self._longitud_esperada: int = _longitud_esperada
 
     def _validar_longitud(self, clave):
-        return len(clave) > self._longitud_esperada
+        if len(clave) <= self._longitud_esperada:
+            raise NoCumpleLongitudMinimaError("La clave debe tener una longitud de más caracteres")
 
     def _contiene_mayuscula(self, clave):
-        return any(char.isupper() for char in clave)
+        if not any(char.isupper() for char in clave):
+            raise NoTieneLetraMayusculaError("La clave debe contener al menos una letra mayúscula")
 
     def _contiene_minuscula(self, clave):
-        return any(char.islower() for char in clave)
+        if not any(char.islower() for char in clave):
+            raise NoTieneLetraMinusculaError("La clave debe contener al menos una letra minúscula")
 
     def _contiene_numero(self, clave):
-        return any(char.isdigit() for char in clave)
+        if not any(char.isdigit() for char in clave):
+            raise NoTieneNumeroError("La clave debe contener al menos un número")
 
     @abstractmethod
     def es_valida(self, clave: str) ->bool:
@@ -34,6 +38,8 @@ class ReglaValidacionGanimedes(ReglaValidacion):
         especiales = "@_#$%"
         return any(char in especiales for char in clave)
 
+    def es_valida(self, clave: str) ->bool:
+        pass
 
 class ReglaValidacionCalisto(ReglaValidacion):
 
