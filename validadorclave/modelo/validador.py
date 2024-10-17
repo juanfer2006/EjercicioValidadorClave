@@ -27,7 +27,11 @@ class ReglaValidacion(ABC):
 
     @abstractmethod
     def es_valida(self, clave: str) ->bool:
-        pass
+        self._validar_longitud(clave)
+        self._contiene_mayuscula(clave)
+        self._contiene_minuscula(clave)
+        self._contiene_numero(clave)
+        return True
 
 
 class ReglaValidacionGanimedes(ReglaValidacion):
@@ -36,12 +40,17 @@ class ReglaValidacionGanimedes(ReglaValidacion):
 
     def contiene_caracter_especial(self, clave):
         especiales = "@_#$%"
-        return any(char in especiales for char in clave)
+        if not any(char in especiales for char in clave):
+            raise NoTieneCaracterEspecialError("La clave debe contener almenos un caracter especial")
 
     def es_valida(self, clave: str) ->bool:
         pass
 
+
 class ReglaValidacionCalisto(ReglaValidacion):
+
+    def __init__(self):
+        super().__init__(6)
 
     def contiene_calisto(self):
         pass
