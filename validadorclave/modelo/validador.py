@@ -2,7 +2,8 @@
 from abc import ABC, abstractmethod
 
 
-class ReglaValidacion:
+class ReglaValidacion(ABC):
+
     def __init__(self, _longitud_esperada):
         self._longitud_esperada = _longitud_esperada
 
@@ -17,4 +18,14 @@ class ReglaValidacion:
 
     def _contiene_numero(self, clave):
         return any(char.isdigit() for char in clave)
+
+    @abstractmethod
+    def es_valida(self):
+        pass
+
+class ReglaValidacionGanimedes:
+
+    def contiene_caracter_especial(self):
+        pass
+
 
